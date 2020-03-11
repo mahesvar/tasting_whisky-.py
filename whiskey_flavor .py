@@ -15,15 +15,13 @@ import matplotlib.pyplot as plt
 
 plt.figure(figsize=(10, 10)) 
 plt.pcolor(corr_flavors) 
-plt.colorbar() 
-	#>>>plt.savefig("corlate-whisky1.pdf") 
+plt.colorbar()  
 
 corr_whisky = pd.DataFrame.corr(flavors.transpose()) 
 plt.figure(figsize=(10, 10)) 
 plt.pcolor(corr_whisky) 
 plt.axis("tight") 
 plt.colorbar() 
-
 
 plt.show() 
 
@@ -34,14 +32,8 @@ import matplotlib.pyplot as plt
 
 model = SpectralCoclustering(n_clusters=6, random_state=0) 
 model.fit(corr_whisky) 
-model.rows_ 
-	 
+model.rows_ 	 
 model.row_labels_ 
-
-from sklearn.cluster.bicluster import SpectralCoclustering 
-import numpy as np 
-import pandas as pd 
-import matplotlib.pyplot as plt 
 
 whisky['Group'] = pd.Series(model.row_labels_, index = whisky.index) 
 whisky = whisky.ix[np.argsort(model.row_labels_)] 
